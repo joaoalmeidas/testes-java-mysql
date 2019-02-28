@@ -9,7 +9,7 @@ public class TesteMySql {
 		
 		if(banco.estaConectado()) {
 			
-			banco.listarPalavras();
+			banco.exibirSignificadoPalavras();
 			
 		}else {
 			

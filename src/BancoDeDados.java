@@ -63,6 +63,26 @@ public class BancoDeDados {
 		
 	}
 	
+	public void exibirSignificadoPalavras() {
+		
+		try {
+			
+			String query = "SELECT xml FROM revision";
+			this.resultset = this.statement.executeQuery(query);
+			this.statement = this.connection.createStatement();
+			while(this.resultset.next()) {
+				System.out.println(this.resultset.getString("xml"));
+			}
+			
+		}catch(Exception e) {
+			
+			System.out.println("Erro: " + e.getMessage());
+			
+		}
+		
+		
+	}
+	
 	public void desconectar() {
 		
 		try {
