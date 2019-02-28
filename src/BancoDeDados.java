@@ -63,7 +63,7 @@ public class BancoDeDados {
 		
 	}
 	
-	public void exibirSignificadoPalavras() {
+	public void listarColunaXml() {
 		
 		try {
 			
@@ -80,6 +80,41 @@ public class BancoDeDados {
 			
 		}
 		
+		
+	}
+	
+	public void corrigeColunaXml() {
+		
+		String significado = "";
+		String entrada = "";
+		int i = 0;
+		try {
+			
+			String query = "SELECT * FROM revision";
+			this.resultset = this.statement.executeQuery(query);
+			this.statement = this.connection.createStatement();
+			while(this.resultset.next()) {
+				
+				entrada = this.resultset.getString("xml");
+				significado = entrada.substring(entrada.indexOf("<def>") + 5, entrada.lastIndexOf("</def>"));
+				
+				if(significado.contains("<")) {
+					
+					significado = String.format("%s%s", significado.substring(0, significado.indexOf('<')), significado.substring(significado.lastIndexOf('>') + 1, significado.length()));
+					System.out.println("veio");
+				}
+				
+				
+				System.out.println(significado);
+				System.out.println(++i);
+				
+			}
+			
+		}catch(Exception e) {
+			
+			System.out.println("Erro: " + e.getMessage());
+			
+		}
 		
 	}
 	

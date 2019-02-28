@@ -9,13 +9,17 @@ public class TesteMySql {
 		
 		if(banco.estaConectado()) {
 			
-			banco.exibirSignificadoPalavras();
+			banco.corrigeColunaXml();
+			
+			banco.desconectar();
 			
 		}else {
 			
 			System.out.println("Não foi possível conectar com o banco.");
 			
 		}
+		
+		
 	}
 
 }
