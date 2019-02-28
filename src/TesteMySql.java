@@ -2,8 +2,20 @@
 public class TesteMySql {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		
+		BancoDeDados banco = new BancoDeDados();
+		
+		banco.conectar();
+		
+		if(banco.estaConectado()) {
+			
+			banco.listarPalavras();
+			
+		}else {
+			
+			System.out.println("Não foi possível conectar com o banco.");
+			
+		}
 	}
 
 }
