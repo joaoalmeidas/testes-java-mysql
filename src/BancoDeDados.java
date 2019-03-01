@@ -87,7 +87,7 @@ public class BancoDeDados {
 		
 		String significado = "";
 		String entrada = "";
-		int i = 0;
+		String id = "";
 		try {
 			
 			String query = "SELECT * FROM revision";
@@ -96,19 +96,27 @@ public class BancoDeDados {
 			while(this.resultset.next()) {
 				
 				entrada = this.resultset.getString("xml");
-				significado = entrada.substring(entrada.indexOf("<def>") + 5, entrada.lastIndexOf("</def>"));
+				id = this.resultset.getString("word_id");
+				
+				significado = entrada.substring(entrada.indexOf("<def>") + 5, entrada.indexOf("</def>"));
+				
+				significado = significado.replace("\n", " ");
+				significado = significado.replace("'", " ");
 				
 				if(significado.contains("<")) {
 					
-					significado = String.format("%s%s", significado.substring(0, significado.indexOf('<')), significado.substring(significado.lastIndexOf('>') + 1, significado.length()));
-					System.out.println("veio");
+					significado = significado.substring(0, significado.indexOf("<"));
+					
 				}
 				
 				
-				System.out.println(significado);
-				System.out.println(++i);
+				query = "UPDATE revision SET xml = '" + significado + "' WHERE word_id = " +id+ ";";
 				
+				//System.out.println(significado);
+				this.statement.executeUpdate(query);
 			}
+			
+			System.out.println("fim");
 			
 		}catch(Exception e) {
 			
